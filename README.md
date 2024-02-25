@@ -32,6 +32,10 @@ if __name__ == '__main__':
     )
 ```
 
+## Web API's
+> /PyLicense/licensing. Based on Django REST Framework.
+```python manage.py runserver```
+
 
 ## Requirements
 Do ```pip install -r requirements.txt```

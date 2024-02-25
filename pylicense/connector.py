@@ -1,8 +1,5 @@
-# PyLicense
-PyLicense is a license validation and management solution for your Python projects. It enables you to check, validate, and manage licenses within your Python applications.
+# PyLicense | Open source licensing solution for Python projects
 
-## Usage
-```python
 import requests
 from lib.license import License
 
@@ -30,11 +27,3 @@ if __name__ == '__main__':
     run(
         'http://127.0.0.1:8000/api/licenses/', # Enter your licenses link
     )
-```
-
-
-## Requirements
-Do ```pip install -r requirements.txt```
-
-## License
-This project is licensed under the GPLv3.0 License. For more information, please see the [LICENSE](LICENSE) file.

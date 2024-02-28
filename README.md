@@ -19,7 +19,12 @@ cd licensing
 python manage.py migrate
 ```
 
-3 - Run API
+3 - Create a superuser
+```
+python manage.py createsuperuser
+```
+
+4 - Run API
 ```
 python manage.py runserver
 ```

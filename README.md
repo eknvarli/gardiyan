@@ -1,6 +1,48 @@
 # PyLicense
 PyLicense is a license validation and management solution for your Python projects. It enables you to check, validate, and manage licenses within your Python applications.
 
+## Install Depencies
+
+```
+pip install -r requirements.txt
+```
+
+## Setup Web API
+
+1 - Locate the directory
+```
+cd licensing
+```
+
+2 - Migration operations
+```
+python manage.py migrate
+```
+
+3 - Run API
+```
+python manage.py runserver
+```
+
+## Adding New Licenses
+#### 1 - Add license from admin panel
+Login your admin panel from `https://your-domain.com/admin/` and add new license from Licenses area.
+
+#### 2 - REST API
+POST request to /api/licenses (login required!)
+
+```json
+{
+    "key":"ENTER_EXAMPLE_LICENSE_KEY",
+    "author":1
+}
+```
+
+author 1 is a default for admin user.
+
+Login endpoint: `/api/login`.
+
+
 ## Usage
 ```python
 # Test application using PyLicense
@@ -27,14 +69,6 @@ def main():
 if __name__ == '__main__':
     main()
 ```
-
-## Web API's
-> /PyLicense/licensing. Based on Django REST Framework.
-```python manage.py runserver```
-
-
-## Requirements
-Do ```pip install -r requirements.txt```
 
 ## License
 This project is licensed under the GPLv3.0 License. For more information, please see the [LICENSE](LICENSE) file.

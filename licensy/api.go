@@ -2,6 +2,7 @@ package licensy
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -43,8 +44,32 @@ func GetAllKeys(db *sql.DB) ([]Key, error) {
 	return keys, nil
 }
 
+func AdminKeyAuth() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		adminKeyHeader := c.GetHeader("Authorization")
+
+		if adminKeyHeader == "" {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "Authorization header gereklidir"})
+			c.Abort()
+			return
+		}
+
+		if adminKeyHeader != AppConfig.AdminKey {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "Geçersiz admin key"})
+			c.Abort()
+			return
+		}
+
+		c.Next()
+	}
+}
+
 func RunServer(port int, db *sql.DB) {
 	r := gin.Default()
+
+	r.Use(AdminKeyAuth())
+
+	fmt.Println("Yüklenen Admin Key:", AppConfig.AdminKey)
 
 	r.GET("/api/keys", func(c *gin.Context) {
 		keys, err := GetAllKeys(db)

@@ -104,6 +104,19 @@ func RunServer(port int, db *sql.DB) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Anahtar bulunamadı"})
 	})
 
+	r.GET("/api/keys/check/:key", func(c *gin.Context) {
+		key := c.Param("key")
+
+		var exists bool
+		err := db.QueryRow("SELECT EXISTS(SELECT 1 FROM keys WHERE key = ?)", key).Scan(&exists)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Veritabanı hatası"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"valid": exists})
+	})
+
 	r.POST("/api/keys", func(c *gin.Context) {
 		var newKey Key
 		if err := c.ShouldBindJSON(&newKey); err != nil {

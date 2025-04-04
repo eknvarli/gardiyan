@@ -1,4 +1,6 @@
-# Example Application
+# Licensy
+
+## Server-side
 
 1. Edit your **config.json**
 
@@ -9,7 +11,7 @@
   }
 ```
 
-2. Add licensy your application
+2. Create your API server
 
 ```go
 package main
@@ -36,5 +38,28 @@ func main() {
 	// run api
 	licensy.RunServer(8080, db)
 }
+```
 
+## Example application
+
+```go
+// Example application
+package main
+
+import (
+	"fmt"
+	"licensy/licensy"
+)
+
+func main() {
+	apiURL := "http://localhost:8080"
+	adminKey := "ENTER_YOUR_ADMIN_KEY"
+
+	keyToCheck := "test1"
+	if licensy.IsKeyFound(apiURL, keyToCheck, adminKey) {
+		fmt.Println("Key geçerli")
+	} else {
+		fmt.Println("Key geçersiz!")
+	}
+}
 ```

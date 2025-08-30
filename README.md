@@ -1,65 +1,79 @@
-# Licensy
+# PyLicense
+PyLicense is a license validation and management solution for your Python projects. It enables you to check, validate, and manage licenses within your Python applications.
 
-## Server-side
+## Install Depencies
 
-1. Edit your **config.json**
+```
+pip install -r requirements.txt
+```
+
+## Setup Web API
+
+1 - Locate the directory
+```
+cd licensing
+```
+
+2 - Migration operations
+```
+python manage.py migrate
+```
+
+3 - Create a superuser
+```
+python manage.py createsuperuser
+```
+
+4 - Run API
+```
+python manage.py runserver
+```
+
+## Adding New Licenses
+#### 1 - Add license from admin panel
+Login your admin panel from `https://your-domain.com/admin/` and add new license from Licenses area.
+
+#### 2 - REST API
+POST request to /api/licenses (login required!)
 
 ```json
 {
-    "admin_key": "ENTER_YOUR_ADMIN_KEY",
-    "database_path": "licensy.db"
-  }
-```
-
-2. Create your API server
-
-```go
-package main
-
-import (
-	"fmt"
-	"licensy/licensy"
-	"log"
-)
-
-func main() {
-	err := licensy.LoadConfig("config.json")
-	if err != nil {
-		log.Fatal("Config yüklenemedi:", err)
-	}
-
-	fmt.Println("Admin Key:", licensy.AppConfig.AdminKey)
-
-	db := licensy.CreateDB()
-	defer db.Close()
-
-	licensy.CreateTable(db)
-
-	// run api
-	licensy.RunServer(8080, db)
+    "key":"ENTER_EXAMPLE_LICENSE_KEY",
+    "author":1
 }
 ```
 
-## Example application
+author 1 is a default for admin user.
 
-```go
-// Example application
-package main
+Login endpoint: `/api/login`.
 
-import (
-	"fmt"
-	"licensy/licensy"
-)
 
-func main() {
-	apiURL := "http://localhost:8080"
-	adminKey := "ENTER_YOUR_ADMIN_KEY"
+## Usage
+```python
+# Test application using PyLicense
+import pylicense
 
-	keyToCheck := "test1"
-	if licensy.IsKeyFound(apiURL, keyToCheck, adminKey) {
-		fmt.Println("Key geçerli")
-	} else {
-		fmt.Println("Key geçersiz!")
-	}
-}
+
+API_URL = 'http://127.0.0.1:8000/api/licenses' # Enter your pylicense api
+
+def main():
+    username = input('username: ')
+    password = input('password: ')
+
+    license = pylicense.License(API_URL,app_key='examplekey1')
+    operation = pylicense.run(API_URL, username, password, license=license)
+
+    # Controller
+    for x in operation: # x: License object
+        check = license.check_license(x['key'])
+        if check:
+            print('License found!')
+        else:
+            print('License not found!')
+
+if __name__ == '__main__':
+    main()
 ```
+
+## License
+This project is licensed under the GPLv3.0 License. For more information, please see the [LICENSE](LICENSE) file.

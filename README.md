@@ -1,7 +1,13 @@
-# PyLicense
-PyLicense is a license validation and management solution for your Python projects. It enables you to check, validate, and manage licenses within your Python applications.
+# 🛡️ Gardiyan - Open source licensing solution
 
-## Install Depencies
+A modern, high-security license validation and management solution. Built with Django REST Framework and Vue.js.
+
+![Gardiyan Dashboard](screenshot.png)
+
+
+## Backend Setup
+
+> ./licensing
 
 ```
 pip install -r requirements.txt
@@ -48,7 +54,7 @@ author 1 is a default for admin user.
 Login endpoint: `/api/login`.
 
 
-## Usage
+## Python Integration
 ```python
 # Test application using PyLicense
 import pylicense
@@ -74,6 +80,17 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+
+## Frontend Setup
+> ./frontend
+
+```
+cd frontend
+npm install
+npm run dev
+```
+
+and check frontend in [http://localhost:5173](http://localhost:5173)
 
 ## License
 This project is licensed under the GPLv3.0 License. For more information, please see the [LICENSE](LICENSE) file.

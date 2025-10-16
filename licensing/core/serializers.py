@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class LicenseSerializer(serializers.ModelSerializer):
     class Meta:
         model = License
-        fields = ['id', 'key', 'user', 'created_at', 'updated_at']
+        fields = ['id', 'key', 'user', 'created_at', 'updated_at','is_active']
 
 
 class UsageLogSerializer(serializers.ModelSerializer):

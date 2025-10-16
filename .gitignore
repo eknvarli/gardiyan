@@ -189,3 +189,7 @@ coverage
 
 *.tsbuildinfo
 .vscode
+/node_modules/
+/public/build/
+
+.DS_Store

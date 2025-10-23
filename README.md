@@ -1,6 +1,6 @@
 # 🛡️ Gardiyan - Open source licensing solution
 
-A modern, high-security license validation and management solution. Built with Django REST Framework and Vue.js.
+A modern, high-security license validation and management solution. Built with Django REST Framework and React.
 
 ![Gardiyan Dashboard](screenshot.png)
 
